@@ -8,6 +8,7 @@ import {
   Scene,
   WebGLRenderer,
 } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new Scene();
 
@@ -39,14 +40,9 @@ renderer.setSize(width, height);
 renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
 document.body.appendChild(renderer.domElement);
 
-const rotateSpeed = 0.001;
-let lastT: number;
-const render = (t: number) => {
-  mesh.rotateY((t - lastT) * rotateSpeed);
+const render = () => {
   renderer.render(scene, camera);
-  lastT = t;
-  requestAnimationFrame(render);
 };
 
-lastT = performance.now();
-render(lastT);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.addEventListener('change', render);

@@ -38,4 +38,15 @@ const renderer = new WebGLRenderer();
 renderer.setSize(width, height);
 renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
 document.body.appendChild(renderer.domElement);
-renderer.render(scene, camera);
+
+const rotateSpeed = 0.001;
+let lastT: number;
+const render = (t: number) => {
+  mesh.rotateY((t - lastT) * rotateSpeed);
+  renderer.render(scene, camera);
+  lastT = t;
+  requestAnimationFrame(render);
+};
+
+lastT = performance.now();
+render(lastT);

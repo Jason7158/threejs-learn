@@ -1,5 +1,6 @@
 import {
   AmbientLight,
+  AxesHelper,
   BoxGeometry,
   Mesh,
   MeshLambertMaterial,
@@ -23,6 +24,9 @@ point.position.set(400, 300, 200);
 
 const ambientLight = new AmbientLight('blue');
 
+const axisHelper = new AxesHelper(500);
+scene.add(axisHelper);
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 var k = width / height; //窗口宽高比
@@ -43,6 +47,6 @@ document.body.appendChild(renderer.domElement);
 const render = () => {
   renderer.render(scene, camera);
 };
-
+render();
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.addEventListener('change', render);

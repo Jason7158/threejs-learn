@@ -1,21 +1,114 @@
 import {
   AmbientLight,
   AxesHelper,
-  BoxGeometry,
+  BufferAttribute,
+  BufferGeometry,
+  DoubleSide,
   Mesh,
+  MeshBasicMaterial,
   MeshLambertMaterial,
+  MeshPhongMaterial,
   OrthographicCamera,
   PointLight,
   Scene,
+  SphereGeometry,
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const scene = new Scene();
 
-const geometry = new BoxGeometry(100, 100, 100);
+const vertices = new Float32Array([
+  0,
+  0,
+  0, //顶点1坐标
+  50,
+  0,
+  0, //顶点2坐标
+  0,
+  100,
+  0, //顶点3坐标
+  0,
+  0,
+  0, //顶点4坐标
+  0,
+  0,
+  100, //顶点5坐标
+  50,
+  0,
+  0, //顶点6坐标
+]);
+var colors = new Float32Array([
+  1,
+  0,
+  0, //顶点1颜色
+  0,
+  1,
+  0, //顶点2颜色
+  0,
+  0,
+  1, //顶点3颜色
+  1,
+  1,
+  0, //顶点4颜色
+  0,
+  1,
+  1, //顶点5颜色
+  1,
+  0,
+  1, //顶点6颜色
+]);
+const normalsCustomize = new Float32Array([
+  1,
+  1,
+  1, //顶点1法向量
+  0,
+  0,
+  1, //顶点2法向量
+  0,
+  2,
+  1, //顶点3法向量
 
-const material = new MeshLambertMaterial({ color: 'red' });
+  0,
+  1,
+  1, //顶点4法向量
+  1,
+  1,
+  0, //顶点5法向量
+  1,
+  1,
+  1, //顶点6法向量
+]);
+var normals = new Float32Array([
+  0,
+  0,
+  1, //顶点1法向量
+  0,
+  0,
+  1, //顶点2法向量
+  0,
+  0,
+  1, //顶点3法向量
+
+  0,
+  1,
+  0, //顶点4法向量
+  0,
+  1,
+  0, //顶点5法向量
+  0,
+  1,
+  0, //顶点6法向量
+]);
+const geometry = new BufferGeometry();
+geometry.attributes.position = new BufferAttribute(vertices, 3);
+// geometry.attributes.color = new BufferAttribute(colors, 3);
+geometry.attributes.normals = new BufferAttribute(normals, 3);
+
+const material = new MeshLambertMaterial({
+  color: 'red',
+  side: DoubleSide,
+});
 
 const mesh = new Mesh(geometry, material);
 

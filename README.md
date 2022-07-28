@@ -1,5 +1,9 @@
 # threejs-learn
 
 # develop
-> pnpm i
-> npm run dev
+```bash 
+pnpm i
+```
+```bash 
+pnpm run dev
+```
